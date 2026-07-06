@@ -2,4 +2,4 @@
 
 This is my first Repository
 <br>
-Author : Yash Patel
+Author : Yash Jagdishbhai Patel
