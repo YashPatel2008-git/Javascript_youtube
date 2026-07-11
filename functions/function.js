@@ -48,3 +48,15 @@ console.log(sum(5,7));
 
 let mul = x => {console.log(x*x)};
 mul(5)
+
+
+//! type of parameters :::::::
+//! 1) Default 
+function add(v1 , v2){
+    console.log(va , v2);   
+}
+
+add();       // not pass argument then it conatain default value which is //! undefined 
+
+
+//! 2)  spred and 
