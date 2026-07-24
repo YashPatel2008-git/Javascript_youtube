@@ -1,0 +1,119 @@
+Window object : 
+
+=>  Window object represents an open Window in browser. It is browser object(not js) & is automatically created by browser 
+=> It is global object with lot of properties and methods.
+
+DOM : (Document Object Modeling) : 
+
+=> When a web page is loaded, the browser creates a Document Object Model (DOM) of the page.
+
+
+DOM manipulation : 
+
+1)  Selecting Items : 
+    I   : Selecting by Id           
+        =>  Document.getElementById("Id");
+        ==> Selects a single element by its unique id attribute.
+
+    II  : Selecting By class     : Here we use Elements because class name is used for many tags. 
+        =>  Document.getElementsByClassName("ClassName);             // It will be return something like array.
+        ==> It's "live" — meaning if elements are added/removed from the DOM matching this class later, 
+        the collection automatically updates.
+
+    III : Selecting By Tag       : Here we use Elements because tag is used for many times.
+        => Document.getElementsByTag("Tag name");
+        ==> document.getElementsByTagName("*") selects every single element on the page
+
+    IV : Selecting By Query : 
+        => here is 2 types : 
+         1) Document.querySelector("Id/Class/Tag");       // Here only return first
+            ==> you can use ANY valid CSS selector: class, id, tag, attribute, pseudo-class, nested combinations
+            ex : 
+                document.querySelector(".text");        // selects by class -> needs the dot!
+                document.querySelector("#special");     // selects by id -> needs the hash!
+                document.querySelector("p");            // selects by tag name -> no symbol needed
+                document.querySelector(".container p"); // selects first <p> INSIDE .container (descendant selector)
+                document.querySelector("p:first-child");// first <p> that is a first child
+                document.querySelector("input[type='radio']"); // by attribute 
+
+         2) Document.querySelectorAll("Id/Class/Tag");    // Return All Elements / return Nodelist
+            ==> This NodeList is STATIC (not live)
+            ==> Returns a NodeList, NOT an HTMLCollection.
+
+
+2) Modifying the content : 
+    I : textContent :
+        => Gets or sets the plain text of an element — including hidden elements, and ignoring any HTML tags
+        => Best choice when you just want to insert/read plain text and don't want to worry about escaping HTML.
+
+    II : innerText : 
+        => Similar to textContent, but CSS-aware — it only returns text that's actually visually rendered on the page.
+        => Slower than textContent 
+
+    III : innerHTML :
+        => Gets or sets the HTML markup inside an element — tags are actually parsed and rendered.
+        => Parses and renders HTML tags — great for inserting structured content dynamically.
+        => Security risk: Never insert user input directly into innerHTML without sanitizing it — this opens the door to XSS (Cross-Site Scripting) attacks.
+        => Every time you set innerHTML, the browser destroys and rebuilds all child nodes inside — so any event listeners attached to old children are lost.
+
+/* Summery : 
+    Property	Parses HTML?	CSS-aware?    Performance	                Security
+    textContent	❌ No	        ❌ No	  ⚡ Fastest	                    ✅ Safe
+    innerText	❌ No	        ✅ Yes	  🐢 Slower (triggers reflow)	 ✅ Safe
+    innerHTML	✅ Yes	           N/A	    🐢 Slower (parses HTML)	      ⚠️ Risky with user input
+*/
+
+
+3) Modifying Attributes : 
+=> Attributes are the extra info inside HTML tags, like src, href, alt, id, class, disabled, data-*, etc.
+
+    # 3.1 Reading & Writing Attributes — Two Approaches
+        Approach 1 : Attribute methods:
+
+            I : getAttribute("attribute_name")                 // To get the attribute value.
+            II : setAttribute("attribute_name" , "value")      // to change the attribute value
+            III : hasAttribute("attribute_name");              // return true or false
+            Iv : removeAttribute("attribute_name")             // To remove attribute 
+    _________________________________________________________________________________________
+    |     => ex :                                                                           | 
+    |        let img = document.getElementById("myImg");                                    |         
+    |                                                                                       |                        
+    |        img.getAttribute("src");           // "old.jpg"                                |
+    |        img.setAttribute("src", "new.jpg"); // changes the src attribute               |
+    |        img.hasAttribute("alt");            // true                                    |
+    |        img.removeAttribute("alt");         // removes the alt attribute entirely      |
+    |                                                                                       |
+    _________________________________________________________________________________________
+
+        Approach 2 : Direct property access
+
+    _________________________________________________________________________________________________
+    |     => ex :                                                                                   | 
+    |   let img = document.getElementById("myImg");                                                 |         
+    |                                                                                               |                        
+    |   img.src;              // "old.jpg" (browser resolves it to FULL URL, not relative path!)    |
+    |   img.src = "new.jpg";   // sets the src                                                      |
+    |   img.id;                 // "myImg"                                                          |
+    |   img.alt = "New alt text";                                                                   |
+    |                                                                                               |
+    _________________________________________________________________________________________________
+
+
+
+# 
+
+* parent node : : :
+Property        	Gets
+parentNode	        Parent Node
+parentElement	    Parent Element Node
+
+* childNodes : : :
+Property	  ------>    Gets
+childNodes	            Child Nodes
+firstChild	            First Child Node
+lastChild	            Last Child Node
+children	            Element Child Nodes
+firstElementChild	    First Child Element Node
+lastElementChild	    Last Child Element Node
+
+* 
